@@ -13,6 +13,9 @@ export const visualizacoes = [
     id: 'streamgraph_raca_docentes_preta_amarela_indigena',
     titulo: 'Docentes pretos, amarelos e indígenas',
   },
+
+  { tipo: 'sankey', id: 'sankey_situacao_alunos', titulo: 'Situação dos alunos por perfil' },
+  { tipo: 'sankey', id: 'sankey_situacao_alunos_cores', titulo: 'Situação dos alunos por perfil (colorido)' },
 ]
 
 export const tipos = [...new Set(visualizacoes.map((v) => v.tipo))]
