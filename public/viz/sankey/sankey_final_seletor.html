@@ -31,11 +31,24 @@
   .coluna button:hover:not(:disabled) { background: #d9d9d9; }
   .coluna button:disabled { color: #bbb; cursor: default; }
   .coluna button:focus-visible, #ano:focus-visible { outline: 2px solid #3b6ea5; outline-offset: 1px; }
-  #ano { width: min(340px, 60vw); accent-color: #6b6b6b; }
-  #ano-valor { display: inline-block; min-width: 2.6em; }
   #grafico { flex: 1; min-height: 0; }
+  /* Linha do tempo embaixo do gráfico, como o slider de ano das outras visualizações. */
+  #linha-tempo { padding: 4px 30px 14px; }
+  #linha-tempo .rotulo { display: block; margin-bottom: 4px; color: #1a1a1a; }
+  #ano { display: block; width: 100%; margin: 0; accent-color: #6b6b6b; cursor: pointer; }
+  /* O centro do marcador do slider percorre a largura menos o próprio marcador (~16px). */
+  #anos { display: flex; justify-content: space-between; margin: 2px 8px 0; }
+  #anos button {
+    width: 0; padding: 0; border: 0; background: none; overflow: visible; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center;
+    font: inherit; font-size: 11px; color: #666; white-space: nowrap;
+  }
+  #anos button::before { content: ""; width: 1px; height: 5px; margin-bottom: 3px; background: #999; }
+  #anos button:hover, #anos button.atual { color: #1a1a1a; font-weight: bold; }
+  #anos button:focus-visible { outline: 2px solid #3b6ea5; outline-offset: 6px; }
+  @media (max-width: 760px) { #anos button:nth-child(even) { visibility: hidden; } }
   body.png { width: 1400px; height: 820px; }
-  body.png #controles { display: none; }
+  body.png #controles, body.png #linha-tempo { display: none; }
 </style>
 </head>
 <body>
@@ -44,12 +57,13 @@
     <span class="rotulo">Ordem das colunas</span>
     <div id="ordem"></div>
   </div>
-  <div class="grupo">
-    <label class="rotulo" for="ano">Ano: <b id="ano-valor"></b></label>
-    <input type="range" id="ano" step="1">
-  </div>
 </div>
 <div id="grafico"></div>
+<div id="linha-tempo">
+  <label class="rotulo" for="ano">Ano: <b id="ano-valor"></b></label>
+  <input type="range" id="ano" step="1">
+  <div id="anos"></div>
+</div>
 
 <script>/**
 * plotly.js v4.0.0
@@ -3930,13 +3944,30 @@ function desenharOrdem() {
 if (MODO_PNG) document.body.classList.add('png');
 entradaAno.min = D.anos[0];
 entradaAno.max = D.anos[D.anos.length - 1];
-entradaAno.value = ano;
-document.getElementById('ano-valor').textContent = ano;
-entradaAno.addEventListener('input', () => {
-  ano = Number(entradaAno.value);
-  document.getElementById('ano-valor').textContent = ano;
-  montarSankey();
+const caixaAnos = document.getElementById('anos');
+D.anos.forEach((a) => {
+  const el = document.createElement('button');
+  el.type = 'button';
+  el.textContent = a;
+  el.dataset.ano = a;
+  el.setAttribute('aria-label', `Ver ${a}`);
+  el.addEventListener('click', () => definirAno(a));
+  caixaAnos.appendChild(el);
 });
+
+function marcarAno() {
+  entradaAno.value = ano;
+  document.getElementById('ano-valor').textContent = ano;
+  caixaAnos.querySelectorAll('button').forEach((el) => el.classList.toggle('atual', Number(el.dataset.ano) === ano));
+}
+function definirAno(novo) {
+  if (novo === ano) return;
+  ano = novo;
+  marcarAno();
+  montarSankey();
+}
+entradaAno.addEventListener('input', () => definirAno(Number(entradaAno.value)));
+marcarAno();
 
 desenharOrdem();
 montarSankey();
