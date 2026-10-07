@@ -18,6 +18,8 @@ export const visualizacoes = [
   { tipo: 'sankey', id: 'sankey_situacao_alunos_cores', titulo: 'Situação dos alunos por perfil (colorido)' },
   { tipo: 'sankey', id: 'sankey_situacao_alunos_evasao', titulo: 'Situação dos alunos com evasão' },
   { tipo: 'sankey', id: 'sankey_situacao_alunos_final', titulo: 'Perfil dos alunos com situação no final' },
+  { tipo: 'sankey', id: 'sankey_evasao_seletor', titulo: 'Com evasão (ordem das colunas à escolha)' },
+  { tipo: 'sankey', id: 'sankey_final_seletor', titulo: 'Situação no final (ordem das colunas à escolha)' },
 ]
 
 export const tipos = [...new Set(visualizacoes.map((v) => v.tipo))]
