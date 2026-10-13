@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { caminho, tipos, visualizacoes } from './visualizacoes'
 
 function idDaUrl() {
@@ -28,10 +28,13 @@ export default function App() {
             <h2>{tipo}</h2>
             {visualizacoes
               .filter((v) => v.tipo === tipo)
-              .map((v) => (
-                <a key={v.id} href={`#${v.id}`} className={v.id === ativa ? 'ativo' : ''}>
-                  {v.titulo}
-                </a>
+              .map((v, i, doTipo) => (
+                <Fragment key={v.id}>
+                  {v.grupo && v.grupo !== doTipo[i - 1]?.grupo && <h3>{v.grupo}</h3>}
+                  <a href={`#${v.id}`} className={v.id === ativa ? 'ativo' : ''}>
+                    {v.titulo}
+                  </a>
+                </Fragment>
               ))}
           </nav>
         ))}
@@ -39,7 +42,7 @@ export default function App() {
 
       <main className="conteudo">
         <header>
-          <h2>{atual.titulo}</h2>
+          <h2>{atual.grupo ? `${atual.grupo}: ${atual.titulo}` : atual.titulo}</h2>
           <a href={caminho(atual)} target="_blank" rel="noreferrer">
             Abrir em tela cheia ↗
           </a>

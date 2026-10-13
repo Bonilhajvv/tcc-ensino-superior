@@ -1,5 +1,6 @@
 // Cada item aponta para public/viz/<tipo>/<id>.html (copiado por scripts/copiar-visualizacoes.mjs).
 // O menu agrupa pelo tipo, na ordem em que os tipos aparecem aqui.
+// `grupo` (opcional) cria subtítulos dentro do tipo; itens do mesmo grupo devem ficar juntos.
 export const visualizacoes = [
   { tipo: 'geospatial', id: 'geospatial_raca_ies', titulo: 'Raça/cor nas IES por estado' },
   { tipo: 'geospatial', id: 'geospatial_bubble_ies', titulo: 'IES no mapa (bolhas)', pesado: true },
@@ -21,12 +22,12 @@ export const visualizacoes = [
   { tipo: 'sankey', id: 'sankey_evasao_seletor', titulo: 'Com evasão (ordem das colunas à escolha)' },
   { tipo: 'sankey', id: 'sankey_final_seletor', titulo: 'Situação no final (ordem das colunas à escolha)' },
 
-  { tipo: 'utfpr', id: 'sankey_evasao_seletor_utfpr', titulo: 'Sankey: situação dos alunos com evasão' },
-  { tipo: 'utfpr', id: 'sankey_final_seletor_utfpr', titulo: 'Sankey: perfil dos alunos com situação no final' },
-  { tipo: 'utfpr', id: 'streamgraph_situacao_alunos_utfpr', titulo: 'Streamgraph: situação dos alunos' },
-  { tipo: 'utfpr', id: 'streamgraph_sexo_alunos_utfpr', titulo: 'Streamgraph: alunos por sexo' },
-  { tipo: 'utfpr', id: 'streamgraph_idade_alunos_utfpr', titulo: 'Streamgraph: alunos por faixa etária' },
-  { tipo: 'utfpr', id: 'streamgraph_raca_alunos_utfpr', titulo: 'Streamgraph: alunos por cor/raça' },
+  { tipo: 'utfpr', grupo: 'Streamgraph', id: 'streamgraph_situacao_alunos_utfpr', titulo: 'Situação dos alunos' },
+  { tipo: 'utfpr', grupo: 'Streamgraph', id: 'streamgraph_sexo_alunos_utfpr', titulo: 'Alunos por sexo' },
+  { tipo: 'utfpr', grupo: 'Streamgraph', id: 'streamgraph_idade_alunos_utfpr', titulo: 'Alunos por faixa etária' },
+  { tipo: 'utfpr', grupo: 'Streamgraph', id: 'streamgraph_raca_alunos_utfpr', titulo: 'Alunos por cor/raça' },
+  { tipo: 'utfpr', grupo: 'Sankey', id: 'sankey_evasao_seletor_utfpr', titulo: 'Situação dos alunos com evasão' },
+  { tipo: 'utfpr', grupo: 'Sankey', id: 'sankey_final_seletor_utfpr', titulo: 'Perfil dos alunos com situação no final' },
 ]
 
 export const tipos = [...new Set(visualizacoes.map((v) => v.tipo))]
