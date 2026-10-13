@@ -2,6 +2,7 @@
 // para public/viz/<tipo>/, de onde o React carrega cada um em um <iframe>.
 // Uso: npm run sincronizar [-- /caminho/para/visu/visualizacoes]
 // O tipo vem da pasta de primeiro nível: geospatial_raca -> geospatial, streamgraph -> streamgraph.
+// Exceção: arquivos terminados em _utfpr.html vão para o tipo utfpr, qualquer que seja o gráfico.
 import { cpSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs'
 import { basename, join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -20,7 +21,7 @@ function buscarHtmls(dir) {
 rmSync(destino, { recursive: true, force: true })
 mkdirSync(destino, { recursive: true })
 for (const arquivo of buscarHtmls(origem)) {
-  const tipo = relative(origem, arquivo).split(sep)[0].split('_')[0]
+  const tipo = arquivo.endsWith('_utfpr.html') ? 'utfpr' : relative(origem, arquivo).split(sep)[0].split('_')[0]
   cpSync(arquivo, join(destino, tipo, basename(arquivo)))
   console.log('copiado:', `${tipo}/${basename(arquivo)}`)
 }

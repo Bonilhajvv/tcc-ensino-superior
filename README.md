@@ -19,6 +19,7 @@ npm run sincronizar   # copia ../visu/visualizacoes/**/output/*.html para public
 ```
 
 Se for uma visualização nova, adicione também uma linha em `src/visualizacoes.js`.
+HTMLs terminados em `_utfpr.html` são copiados para `public/viz/utfpr/` e entram na categoria `utfpr` do menu.
 
 ## Deploy
 

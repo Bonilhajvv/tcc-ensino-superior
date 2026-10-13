@@ -20,6 +20,13 @@ export const visualizacoes = [
   { tipo: 'sankey', id: 'sankey_situacao_alunos_final', titulo: 'Perfil dos alunos com situação no final' },
   { tipo: 'sankey', id: 'sankey_evasao_seletor', titulo: 'Com evasão (ordem das colunas à escolha)' },
   { tipo: 'sankey', id: 'sankey_final_seletor', titulo: 'Situação no final (ordem das colunas à escolha)' },
+
+  { tipo: 'utfpr', id: 'sankey_evasao_seletor_utfpr', titulo: 'Sankey: situação dos alunos com evasão' },
+  { tipo: 'utfpr', id: 'sankey_final_seletor_utfpr', titulo: 'Sankey: perfil dos alunos com situação no final' },
+  { tipo: 'utfpr', id: 'streamgraph_situacao_alunos_utfpr', titulo: 'Streamgraph: situação dos alunos' },
+  { tipo: 'utfpr', id: 'streamgraph_sexo_alunos_utfpr', titulo: 'Streamgraph: alunos por sexo' },
+  { tipo: 'utfpr', id: 'streamgraph_idade_alunos_utfpr', titulo: 'Streamgraph: alunos por faixa etária' },
+  { tipo: 'utfpr', id: 'streamgraph_raca_alunos_utfpr', titulo: 'Streamgraph: alunos por cor/raça' },
 ]
 
 export const tipos = [...new Set(visualizacoes.map((v) => v.tipo))]
