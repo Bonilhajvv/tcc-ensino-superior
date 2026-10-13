@@ -1,6 +1,6 @@
 // Cada item aponta para public/viz/<tipo>/<id>.html (copiado por scripts/copiar-visualizacoes.mjs).
 // O menu agrupa pelo tipo, na ordem em que os tipos aparecem aqui.
-// `grupo` (opcional) cria subtítulos dentro do tipo; itens do mesmo grupo devem ficar juntos.
+// `grupo` (opcional) cria uma sanfona dentro do tipo; em um tipo com grupos, todo item precisa de um.
 export const visualizacoes = [
   { tipo: 'geospatial', id: 'geospatial_raca_ies', titulo: 'Raça/cor nas IES por estado' },
   { tipo: 'geospatial', id: 'geospatial_bubble_ies', titulo: 'IES no mapa (bolhas)', pesado: true },
